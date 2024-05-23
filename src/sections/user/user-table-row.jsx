@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
@@ -14,15 +15,27 @@ import IconButton from '@mui/material/IconButton';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
+import { generateGender } from './utils';
+
 // ----------------------------------------------------------------------
+
+const shapeStyles = { width: 10, height: 10 };
+const shapeCircleStyles = { borderRadius: '50%' };
+
+// eslint-disable-next-line react/prop-types
+export const Circle = ({ status }) => (
+  <Box
+    component="span"
+    sx={{ ...shapeStyles, ...shapeCircleStyles, bgcolor: status === 1 ? '#4caf50' : '#616161' }}
+  />
+);
 
 export default function UserTableRow({
   selected,
   name,
   avatarUrl,
-  company,
-  role,
-  isVerified,
+  email,
+  gender,
   status,
   handleClick,
 }) {
@@ -52,14 +65,14 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        <TableCell>{email}</TableCell>
 
-        <TableCell>{role}</TableCell>
+        <TableCell>{generateGender(gender)}</TableCell>
 
-        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
-
-        <TableCell>
-          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
+        <TableCell align="center">
+          <Label>
+            <Circle status={status} />
+          </Label>
         </TableCell>
 
         <TableCell align="right">
@@ -95,11 +108,10 @@ export default function UserTableRow({
 
 UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
-  company: PropTypes.any,
+  email: PropTypes.any,
   handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
   name: PropTypes.any,
-  role: PropTypes.any,
+  gender: PropTypes.any,
   selected: PropTypes.any,
-  status: PropTypes.string,
+  status: PropTypes.number,
 };
