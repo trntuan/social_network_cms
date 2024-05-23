@@ -1,2 +1,3 @@
 //* Metadatas
-export const selectMetadatas = (state) => state.metadatas;
+export const selectUsers = (state) => state.users;
+export const selectTeams = (state) => state.teams;

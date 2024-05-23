@@ -5,10 +5,10 @@ import loggerMiddleware from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 
 // * IMPORT
-import MetadataReducer from './metadatas/Slice'
+import UserReducer from './users/Slice'
+import TeamReducer from './teams/Slice'
 
-const shouldEnvironment = process.env.NODE_APP === "DEV";
-
+const shouldEnvironment  = import.meta.env.VITE_NODE_APP === 'DEV'
 const middlewares = [];
 
 if (shouldEnvironment) {
@@ -17,7 +17,8 @@ if (shouldEnvironment) {
 
 export const store = configureStore({
 	reducer: {
-        metadatas: MetadataReducer,
+        users: UserReducer,
+		teams: TeamReducer
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
 	devTools: shouldEnvironment,

@@ -4,11 +4,11 @@ import { ProductsView } from 'src/sections/products/view';
 
 // ----------------------------------------------------------------------
 
-export default function ProductsPage() {
+export default function TeamsPage() {
   return (
     <>
       <Helmet>
-        <title> Products | Minimal UI </title>
+        <title> Danh sách nhóm </title>
       </Helmet>
 
       <ProductsView />

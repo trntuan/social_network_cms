@@ -9,7 +9,8 @@ import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 
 import Router from 'src/routes/sections';
 import ThemeProvider from 'src/theme';
-import { store } from 'src/providers/redux/store'
+import { store } from 'src/providers/redux/store';
+import { AuthProvider } from './providers/contexts/AuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <Provider store={store}>
-        <Router />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
       </Provider>
     </ThemeProvider>
   );

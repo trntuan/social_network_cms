@@ -54,3 +54,14 @@ export function applyFilter({ inputData, comparator, filterName }) {
 
   return inputData;
 }
+
+export const generateGender = (typeGender) => {
+  switch (typeGender) {
+    case 0:
+      return 'Nam'
+    case 1:
+      return 'Nữ'
+    default: 
+      return 'Nam'
+  }
+} 
