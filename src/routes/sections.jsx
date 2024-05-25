@@ -3,8 +3,6 @@ import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 
 import DashboardLayout from 'src/layouts/dashboard';
 
-import ProtectedRoute from './protected-route';
-
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const UserPage = lazy(() => import('src/pages/user'));
@@ -17,29 +15,26 @@ export const TeamDetailPage = lazy(() => import('src/pages/team-detail'));
 export default function Router() {
   const routes = useRoutes([
     {
-      element: <ProtectedRoute />,
+      element: (
+        <DashboardLayout>
+            <Suspense>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+      ),
       children: [
-        {
-          element: (
-            <DashboardLayout>
-              <Suspense>
-                <Outlet />
-              </Suspense>
-            </DashboardLayout>
-          ),
-          children: [
-            { element: <IndexPage />, index: true },
-            { path: 'user', element: <UserPage /> },
-            { path: 'teams', element: <TeamsPage /> },
-            { path: 'blog', element: <BlogPage /> },
-            { path: 'teams/:teamId', element: <TeamDetailPage /> },
-          ],
-        },
+        { element: <IndexPage />, index: true },
+        { path: 'user', element: <UserPage /> },
+        { path: 'teams', element: <TeamsPage /> },
+        { path: 'blog', element: <BlogPage /> },
+        { path: 'teams/:teamId', element: <TeamDetailPage /> },
       ],
     },
     {
       path: 'login',
-      element: <LoginPage />,
+      element: (
+        <LoginPage />
+      ),
     },
     {
       path: '404',

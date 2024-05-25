@@ -19,11 +19,12 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <Provider store={store}>
+       <Provider store={store}>
         <AuthProvider>
           <Router />
         </AuthProvider>
       </Provider>
+
     </ThemeProvider>
   );
 }

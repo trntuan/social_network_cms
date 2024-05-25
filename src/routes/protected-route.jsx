@@ -1,27 +1,26 @@
 import React from 'react';
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-import { useAuth } from 'src/providers/contexts/AuthContext';
+// import AuthService from 'src/services/AuthService';
 
-const whileList = ['/login'];
+// const whileList = ['/login'];
 
-function ProtectedRoute() {
-  const { isAuthenticated } = useAuth();
+// eslint-disable-next-line react/prop-types
+function ProtectedRoute({ children }) {
+  // const location = useLocation();
+  const token = localStorage.getItem('token');
 
-  const location = useLocation();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // if (token && whileList.includes(location.pathname)) {
+  //   return AuthService.refresh(token)
+  // }
 
-  if (isAuthenticated && whileList.includes(location.pathname)) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!isAuthenticated) {
+  if (!token) {
     // Redirect to login if the user is not authenticated
     return <Navigate to="/login" replace />;
   }
 
   // Otherwise, render the Outlet to render child routes
-  return <Outlet />;
+  return <>{children}</>;
 }
 
 export default ProtectedRoute;
