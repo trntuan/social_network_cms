@@ -1,14 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getTeamsList, getTeamDetail } from './Thunk';
+import { getTeamsList, getTeamPosts, getTeamDetail } from './Thunk';
 
 
 const initialState = {
     teams: [],
     isLoading: false,
     error: {},
-    teamDetail: null
+    teamDetail: null,
+    posts: []
 };
 
 const teamsSlice = createSlice({
@@ -28,6 +29,13 @@ const teamsSlice = createSlice({
         builder.addCase(getTeamDetail.fulfilled, (state, action) => {
             state.isLoading = false;
             state.teamDetail = action.payload;
+        })
+        builder.addCase(getTeamPosts.pending, (state, _) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getTeamPosts.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.posts = action.payload;
         })
         builder.addMatcher(
 			(action) => action.type.endsWith('/rejected'),

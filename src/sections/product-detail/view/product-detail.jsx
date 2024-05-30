@@ -6,8 +6,9 @@ import { Box, Grid, Card, Container, IconButton, Typography } from '@mui/materia
 import useAppDispatch from 'src/hooks/useDispatch';
 import useStoreSelector from 'src/hooks/useStoreSelector';
 
-import { getTeamDetail } from 'src/providers/redux/teams/Thunk';
+import { getTeamPosts, getTeamDetail } from 'src/providers/redux/teams/Thunk';
 
+import ProductCard from '../product-card';
 import ProductInfor from '../product-info';
 import ProductMember from '../product-members';
 import ProductCardHero from '../product-cart-hero';
@@ -33,11 +34,17 @@ export default function ProductDetailView() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { teamsState } = useStoreSelector();
-  const { teamDetail } = teamsState;
+  const { teamDetail, posts } = teamsState;
   const { teamId } = useParams();
 
   useEffect(() => {
     dispatch(getTeamDetail(teamId));
+    dispatch(
+      getTeamPosts({
+        page: 4,
+        pageSize: 30,
+      })
+    );
   }, [dispatch, teamId]);
 
   return (
@@ -66,13 +73,28 @@ export default function ProductDetailView() {
             <Grid item xs={12} sm={6} md={6}>
               <ProductCardHero product={teamDetail} />
             </Grid>
-            <Grid item xs={12} sm={6} >
+            <Grid item xs={12} sm={6}>
               <ProductInfor product={teamDetail} />
             </Grid>
           </Grid>
         </Card>
         <Box mt={5}>
-          <ProductMember leaderId={teamDetail.creator_user_id} members={teamDetail.teamMembers} />
+          <ProductMember leaderId={teamDetail?.creator_user_id} members={teamDetail.teamMembers} />
+        </Box>
+
+        <Box mt={5}>
+          <Typography variant="h4" sx={{ mb: 0, textTransform: 'uppercase' }}>
+            Dánh sách bài viết
+          </Typography>
+          <Grid container spacing={3} mt={1}>
+            {Array.isArray(posts) &&
+              posts.length > 0 &&
+              posts.map((post) => (
+                <Grid key={post?.post_post_id} item xs={12} sm={6} md={3}>
+                  <ProductCard post={post} />
+                </Grid>
+              ))}
+          </Grid>
         </Box>
       </Container>
     )

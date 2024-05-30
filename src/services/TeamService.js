@@ -14,6 +14,12 @@ class TeamService {
     const response = await getApi('team/detail', queryParams);
     return response;
   }
+
+    // eslint-disable-next-line class-methods-use-this
+    async getTeamPosts(queryParams) {
+      const response = await getApi('post/all_posts', queryParams);
+      return response;
+    }
 }
 
 export default new TeamService();

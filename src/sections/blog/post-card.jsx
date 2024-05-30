@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -10,6 +11,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
 import { fDate } from 'src/utils/format-time';
+import { fImage } from 'src/utils/format-image';
 import { fShortenNumber } from 'src/utils/format-number';
 
 import Iconify from 'src/components/iconify';
@@ -18,7 +20,8 @@ import SvgColor from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 export default function PostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+
+  const navigate = useNavigate();
 
   const latestPostLarge = index === 0;
 
@@ -26,8 +29,8 @@ export default function PostCard({ post, index }) {
 
   const renderAvatar = (
     <Avatar
-      alt={author.name}
-      src={author.avatarUrl}
+      alt={post?.post_content}
+      src={fImage(post?.user_avatar)}
       sx={{
         zIndex: 9,
         width: 32,
@@ -46,12 +49,14 @@ export default function PostCard({ post, index }) {
     />
   );
 
+
   const renderTitle = (
     <Link
       color="inherit"
       variant="subtitle2"
       underline="hover"
       sx={{
+        cursor: 'pointer',
         height: 44,
         overflow: 'hidden',
         WebkitLineClamp: 2,
@@ -62,8 +67,11 @@ export default function PostCard({ post, index }) {
           color: 'common.white',
         }),
       }}
+      onClick={() => {
+        navigate(`/posts/${post?.post_post_id}`);
+      }}
     >
-      {title}
+      {post.post_content}
     </Link>
   );
 
@@ -79,9 +87,8 @@ export default function PostCard({ post, index }) {
       }}
     >
       {[
-        { number: comment, icon: 'eva:message-circle-fill' },
-        { number: view, icon: 'eva:eye-fill' },
-        { number: share, icon: 'eva:share-fill' },
+        { number: post.commentCount, icon: 'eva:message-circle-fill' },
+        { number: post.post_user_post, icon: 'eva:eye-fill' },
       ].map((info, _index) => (
         <Stack
           key={_index}
@@ -103,8 +110,8 @@ export default function PostCard({ post, index }) {
   const renderCover = (
     <Box
       component="img"
-      alt={title}
-      src={cover}
+      alt={post}
+      src={fImage(post?.post_image_url[0]) || 'https://i.pinimg.com/564x/e8/13/74/e8137457cebc9f60266ffab0ca4e83a6.jpg'}
       sx={{
         top: 0,
         width: 1,
@@ -128,7 +135,7 @@ export default function PostCard({ post, index }) {
         }),
       }}
     >
-      {fDate(createdAt)}
+      {fDate(post.post_created_date)}
     </Typography>
   );
 

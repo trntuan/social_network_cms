@@ -39,7 +39,7 @@ export default function ProductMember({ leaderId, members }) {
         Thành viên
       </Typography>
       <Grid container spacing={3} mt={2}>
-        <Grid item xs={6} sm={6} md={4}>
+        { userLeader && <Grid item xs={12} sm={6} md={4}>
           <Card
             spacing={2}
             sx={{
@@ -87,13 +87,13 @@ export default function ProductMember({ leaderId, members }) {
               {userLeader?.role?.role_name}
             </Typography>
           </Card>
-        </Grid>
+        </Grid> }
         {Array.isArray(members) &&
           members.length > 0 &&
           members
             .filter((m) => m.user_id !== leaderId)
             .map((member) => (
-              <Grid key={member.user_id} item xs={6} sm={6} md={4}>
+              <Grid key={member.user_id} item xs={12} sm={6} md={4}>
                 <Card
                   spacing={2}
                   sx={{

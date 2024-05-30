@@ -10,7 +10,7 @@ export default function ProductInfor({ product }) {
       { label: 'Mô tả', value: product.description },
       {
         label: 'Trưởng nhóm',
-        value: product.teamMembers.find((p) => p.user_id === product.creator_user_id).user
+        value: product.teamMembers.find((p) => p.user_id === product.creator_user_id)?.user
           .display_name,
       },
       { label: 'Số lượng', value: product.teamMembers.length },
@@ -25,7 +25,7 @@ export default function ProductInfor({ product }) {
           key={field.label}
           direction={{ xs: 'column', sm: 'row' }}
           alignItems={{ xs: 'flex-start', sx: 'center' }}
-          gap={4}
+          gap={{ xs: 1, md: 4 }}
         >
           <Typography
             variant="h6"

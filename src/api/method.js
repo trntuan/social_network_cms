@@ -1,4 +1,5 @@
 //* IMPORT
+// eslint-disable-next-line import/no-cycle
 import axiosIns from 'src/libs/axios';
 
 export const getApi = async (url, params, config) => {

@@ -22,11 +22,11 @@ const navConfig = [
     path: '/teams',
     icon: icon('ic_group'),
   },
-  // {
-  //   title: 'blog',
-  //   path: '/blog',
-  //   icon: icon('ic_blog'),
-  // },
+  {
+    title: 'Quản lý bài viết',
+    path: '/blog',
+    icon: icon('ic_blog'),
+  },
   // {
   //   title: 'login',
   //   path: '/login',

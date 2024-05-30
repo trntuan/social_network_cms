@@ -30,10 +30,7 @@ axiosIns.interceptors.request.use(
 );
 
 axiosIns.interceptors.response.use(
-  (res) => {
-    console.log(res, '----------1--------------');
-    return res
-  }, // Simply return the response
+  (res) => res, // Simply return the response
   // eslint-disable-next-line consistent-return
   async (err) => {
     const status = err.response ? err.response.status : null;

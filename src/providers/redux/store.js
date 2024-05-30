@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // * IMPORT
 import UserReducer from './users/Slice'
 import TeamReducer from './teams/Slice'
+import PostReducer from './posts/Slice'
 
 const shouldEnvironment  = import.meta.env.VITE_NODE_APP === 'DEV'
 const middlewares = [];
@@ -18,7 +19,8 @@ if (shouldEnvironment) {
 export const store = configureStore({
 	reducer: {
         users: UserReducer,
-		teams: TeamReducer
+		teams: TeamReducer,
+		posts: PostReducer
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
 	devTools: shouldEnvironment,

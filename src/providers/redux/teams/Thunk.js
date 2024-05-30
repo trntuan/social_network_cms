@@ -23,3 +23,12 @@ export const getTeamDetail = createAsyncThunk("teams/get/detail", async(teamId, 
         return rejectWithValue(error);
     }
 })
+
+export const getTeamPosts = createAsyncThunk("teams/get/posts", async(paramsQuery, { rejectWithValue }) => {
+    try {
+        const response = await TeamService.getTeamPosts(paramsQuery)
+        return response
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+})
