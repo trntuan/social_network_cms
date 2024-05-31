@@ -1,5 +1,5 @@
-import { format, getTime, formatDistanceToNow } from 'date-fns';
-
+import { vi } from 'date-fns/locale';
+import { format, getTime, parseISO, formatDistanceToNow } from 'date-fns';
 // ----------------------------------------------------------------------
 
 export function fDate(date, newFormat) {
@@ -24,4 +24,10 @@ export function fToNow(date) {
         addSuffix: true,
       })
     : '';
+}
+
+export function fMinute(date) {
+  const dateNow = parseISO(date);
+  const result = formatDistanceToNow(dateNow, { addSuffix: true, locale: vi });
+  return result;
 }

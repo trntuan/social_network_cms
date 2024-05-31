@@ -36,7 +36,6 @@ export function TablerUser(props) {
 export default function ProductCard({ post }) {
   const navigate = useNavigate();
 
-  console.log(post);
   // const renderStatus = (
   //   <Label
   //     variant="filled"

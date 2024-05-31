@@ -68,7 +68,7 @@ export default function PostCard({ post, index }) {
         }),
       }}
       onClick={() => {
-        navigate(`/posts/${post?.post_post_id}`);
+        navigate(`/blog/${post?.post_post_id}`);
       }}
     >
       {post.post_content}
