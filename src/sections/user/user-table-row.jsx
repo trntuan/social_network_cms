@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { Box, Link } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
@@ -35,10 +36,13 @@ export default function UserTableRow({
   name,
   avatarUrl,
   email,
+  id,
   gender,
   status,
   handleClick,
 }) {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -60,7 +64,20 @@ export default function UserTableRow({
           <Stack direction="row" alignItems="center" spacing={2}>
             <Avatar alt={name} src={avatarUrl} />
             <Typography variant="subtitle2" noWrap>
-              {name}
+              <Link
+                color="inherit"
+                underline="hover"
+                variant="subtitle2"
+                noWrap
+                sx={{
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  navigate(`/user/${id}`);
+                }}
+              >
+                {name}
+              </Link>
             </Typography>
           </Stack>
         </TableCell>
@@ -92,14 +109,18 @@ export default function UserTableRow({
           sx: { width: 140 },
         }}
       >
-        <MenuItem onClick={handleCloseMenu}>
+        <MenuItem
+          onClick={() => {
+            navigate(`/user/${id}`);
+          }}
+        >
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
-          Edit
+          Chi tiết
         </MenuItem>
 
         <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
-          Delete
+          Block
         </MenuItem>
       </Popover>
     </>
@@ -114,4 +135,5 @@ UserTableRow.propTypes = {
   gender: PropTypes.any,
   selected: PropTypes.any,
   status: PropTypes.number,
+  id: PropTypes.number,
 };
