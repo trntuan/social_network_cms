@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { Navigate, useNavigate } from 'react-router-dom'
-import React, { useState, useContext, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 import AuthService from 'src/services/AuthService';
 
@@ -23,20 +23,24 @@ export function AuthProvider({ children }) {
         password,
       });
 
-      setIsAuthenticated(res);
+
       localStorage.setItem('token', res.access_token);
-      navigate('/')
+      setIsAuthenticated(res);
+      navigate('/');
     } catch (error) {
       console.error(error);
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
 
-  if (!token) {
-    // Redirect to login if the user is not authenticated
-    return <Navigate to="/login" replace />;
-  }
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    } else {
+      setIsAuthenticated(true); // or validate token with a service call
+    }
+  }, [token, navigate]);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
@@ -53,4 +57,3 @@ export function useAuth() {
 AuthProvider.prototype = {
   children: PropTypes.any,
 };
-
