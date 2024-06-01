@@ -30,3 +30,12 @@ export const getCommentDetail = createAsyncThunk("post/get/comment", async (para
         return rejectWithValue(error);
     }
 })
+
+export const getPostReport = createAsyncThunk("post/get/report", async (params, { rejectWithValue }) => {
+    try {
+        const response = await PostService.getPostReport(params)
+        return response
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+})

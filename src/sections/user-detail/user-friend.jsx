@@ -20,9 +20,11 @@ import Iconify from 'src/components/iconify';
 export default function UserFriends({ members }) {
 
   const [open, setOpen] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const handleOpenMenu = (event) => {
+  const handleOpenMenu = (event, index) => {
     setOpen(event.currentTarget);
+    setActiveIndex(index)
   };
 
   const handleCloseMenu = () => {
@@ -35,7 +37,7 @@ export default function UserFriends({ members }) {
         {Array.isArray(members) &&
           members.length > 0 &&
           members
-            .map((member) => (
+            .map((member , index) => (
               <Grid key={member.user_id} item xs={12} sm={6} md={4}>
                 <Card
                   spacing={2}
@@ -59,7 +61,7 @@ export default function UserFriends({ members }) {
                       />
                     }
                     action={
-                      <IconButton aria-label="settings" onClick={handleOpenMenu}>
+                      <IconButton aria-label="settings" onClick={(event) => handleOpenMenu(event, index)}>
                         <Iconify icon="eva:more-vertical-fill" />
                       </IconButton>
                     }
@@ -80,7 +82,7 @@ export default function UserFriends({ members }) {
                     }
                   />
                   <Popover
-                    open={!!open}
+                    open={!!open && activeIndex === index}
                     anchorEl={open}
                     onClose={handleCloseMenu}
                     anchorOrigin={{ vertical: 'top', horizontal: 'left' }}

@@ -27,6 +27,11 @@ const navConfig = [
     path: '/blog',
     icon: icon('ic_blog'),
   },
+  {
+    title: 'Quản lý report',
+    path: '/blog-report',
+    icon: icon('ic_lock'),
+  },
   // {
   //   title: 'login',
   //   path: '/login',

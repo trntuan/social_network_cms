@@ -12,6 +12,7 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export const TeamDetailPage = lazy(() => import('src/pages/team-detail'));
 export const BlogDetailPage = lazy(() => import('src/pages/blog-detail'));
 export const UserDetailPage = lazy(() => import('src/pages/user-detail'))
+export const BlogReportPage = lazy(() => import('src/pages/blog-report'))
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -31,7 +32,8 @@ export default function Router() {
         { path: 'blog', element: <BlogPage /> },
         { path: 'teams/:teamId', element: <TeamDetailPage /> },
         { path: 'blog/:blogId', element: <BlogDetailPage /> },
-        { path: 'user/:userId', element: <UserDetailPage /> }
+        { path: 'user/:userId', element: <UserDetailPage /> },
+        { path: 'blog-report', element: <BlogReportPage /> }
       ],
     },
     {

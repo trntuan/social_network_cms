@@ -20,6 +20,12 @@ class PostService {
     const response = await getApi('post/comment_list', queryParams);
     return response;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getPostReport(queryParams) {
+    const response = await getApi('post/post_report_list', queryParams);
+    return response;
+  }
 }
 
 export default new PostService();

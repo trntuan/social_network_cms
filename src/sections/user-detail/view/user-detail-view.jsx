@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Tab, Box, Tabs, Container, IconButton, Typography } from '@mui/material';
+import { Tab, Box, Tabs, Button, Container, IconButton, Typography } from '@mui/material';
 
 import useAppDispatch from 'src/hooks/useDispatch';
 import useStoreSelector from 'src/hooks/useStoreSelector';
 
-import { getUserPost, getUserTeams, getUserDetail, getUserFriends } from 'src/providers/redux/users/Thunk';
+import {
+  getUserPost,
+  getUserTeams,
+  getUserDetail,
+  getUserFriends,
+} from 'src/providers/redux/users/Thunk';
 
 import UserFriends from '../user-friend';
 import UserProfile from '../user-profile';
@@ -64,17 +69,23 @@ const UserDetailView = () => {
         id: userId,
       })
     );
-    dispatch(getUserPost({
-      user_id: userId,
-      page: 4,
-      pageSize: 30
-    }))
-    dispatch(getUserTeams({
-      user_id: userId
-    }))
-    dispatch(getUserFriends({
-      user_id: userId
-    }))
+    dispatch(
+      getUserPost({
+        user_id: userId,
+        page: 4,
+        pageSize: 30,
+      })
+    );
+    dispatch(
+      getUserTeams({
+        user_id: userId,
+      })
+    );
+    dispatch(
+      getUserFriends({
+        user_id: userId,
+      })
+    );
   }, [dispatch, userId]);
 
   function a11yProps(index) {
@@ -102,6 +113,15 @@ const UserDetailView = () => {
         Thông tin
       </Typography>
 
+      <Button
+        variant="contained"
+        color="inherit"
+        sx={{
+          margin: '20px 0',
+        }}
+      >
+        Block
+      </Button>
       <UserCardHero
         userInfo={userDetail}
         renderTabs={
