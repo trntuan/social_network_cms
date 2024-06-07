@@ -6,7 +6,7 @@ import { UserDetailView } from 'src/sections/user-detail/view';
 const UserDetail = () => (
   <>
     <Helmet>
-      <title> Blog | Minimal UI </title>
+      <title> Quản lý user </title>
     </Helmet>
 
     <UserDetailView />

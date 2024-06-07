@@ -8,7 +8,7 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Blog | Minimal UI </title>
+        <title> Quản lý bài Viết </title>
       </Helmet>
 
       <BlogView />
