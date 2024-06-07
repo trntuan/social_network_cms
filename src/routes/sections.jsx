@@ -26,7 +26,7 @@ export default function Router() {
           </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
+        { element: <UserPage />, index: true, },
         { path: 'user', element: <UserPage /> },
         { path: 'teams', element: <TeamsPage /> },
         { path: 'blog', element: <BlogPage /> },
